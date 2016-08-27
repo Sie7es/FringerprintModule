@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">FingerprintComponent</string>
+    <string name="toca_el_sensor">Toca el sensor</string>
+    <string name="text_finger_not_found">Huella no encontrada</string>
+    <string name="text_finger_found">Huella encontrada</string>
+    <string name="text_finger_lock_screen_not_enabled">La pantalla de bloqueo de seguridad no está activada en los ajustes</string>
+    <string name="text_fingerprint_permission_not_enabled">La autentificación mediante huella digital no está habilitada</string>
+    <string name="text_fingerprint_has_not_fingers_enrolled">No tiene ninguna huella almacenada en el dispositivo.</string>
+
+    <string name="text_get_key_store_instance_failed">No se ha podido obtener la instancia del KeyGenerator</string>
+    <string name="text_cipher_error">No se ha podido iniciar Cipher</string>
+</resources>
