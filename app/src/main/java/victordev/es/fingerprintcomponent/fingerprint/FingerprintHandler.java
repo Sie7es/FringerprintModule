@@ -10,7 +10,6 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 
 import victordev.es.fingerprintcomponent.interactors.FingerprintInteractor;
-import victordev.es.fingerprintcomponent.presenters.FingerprintPresenter;
 
 /**
  * Created by victor on 27/8/16.
@@ -18,14 +17,19 @@ import victordev.es.fingerprintcomponent.presenters.FingerprintPresenter;
 
 @RequiresApi(api = Build.VERSION_CODES.M)
 public class FingerprintHandler extends FingerprintManager.AuthenticationCallback {
-    private FingerprintInteractor mFingerprintPresenter;
+    private FingerprintInteractor mFingerprintInteractor;
 
     private CancellationSignal mCancellationSignal;
+    private FingerprintManager mFingerprintManager;
+    private FingerprintManager.CryptoObject mCryptoObject;
+
     private Context mAppContext;
 
-    public FingerprintHandler(Context context, FingerprintInteractor presenter) {
+
+    public FingerprintHandler(Context context, FingerprintInteractor interactor) {
         mAppContext = context;
-        mFingerprintPresenter = presenter;
+        mFingerprintInteractor = interactor;
+
     }
 
     /*
@@ -34,6 +38,9 @@ public class FingerprintHandler extends FingerprintManager.AuthenticationCallbac
      */
     public void startAuth(FingerprintManager manager,
                           FingerprintManager.CryptoObject cryptoObject) {
+
+        mFingerprintManager = manager;
+        mCryptoObject = cryptoObject;
 
         mCancellationSignal = new CancellationSignal();
 
@@ -47,6 +54,13 @@ public class FingerprintHandler extends FingerprintManager.AuthenticationCallbac
         manager.authenticate(cryptoObject, mCancellationSignal, 0, this, null);
     }
 
+    public void stopListening() {
+        if (mCancellationSignal != null) {
+            mCancellationSignal.cancel();
+            mCancellationSignal = null;
+        }
+    }
+
     @Override
     public void onAuthenticationError(int errorCode, CharSequence errString) {
         super.onAuthenticationError(errorCode, errString);
@@ -55,15 +69,25 @@ public class FingerprintHandler extends FingerprintManager.AuthenticationCallbac
     @Override
     public void onAuthenticationHelp(int helpCode, CharSequence helpString) {
         super.onAuthenticationHelp(helpCode, helpString);
+
+        mFingerprintInteractor.onAuthenticationHelp(helpString);
+        startAuth(mFingerprintManager, mCryptoObject);
     }
 
     @Override
     public void onAuthenticationSucceeded(FingerprintManager.AuthenticationResult result) {
         super.onAuthenticationSucceeded(result);
+
+        mFingerprintInteractor.onAuthenticationSucceeded();
+        startAuth(mFingerprintManager, mCryptoObject);
     }
 
     @Override
     public void onAuthenticationFailed() {
         super.onAuthenticationFailed();
+
+        mFingerprintInteractor.onAuthenticationFailed();
+
+        startAuth(mFingerprintManager, mCryptoObject);
     }
 }

@@ -21,8 +21,9 @@ public class FingerPrint extends AppCompatActivity implements FingerprintViewInt
         super.onCreate(savedInstanceState);
         setContentView(R.layout.finger_print);
 
-        mFingerprintPresenter = new FingerprintPresenter(this);
         mCoordinatorLayout = (CoordinatorLayout) findViewById(R.id.fp_coordinator_layout);
+        mFingerprintPresenter = new FingerprintPresenter(this);
+
     }
 
     @Override
@@ -33,7 +34,7 @@ public class FingerPrint extends AppCompatActivity implements FingerprintViewInt
 
     @Override
     public void authenticationSucceded() {
-        Snackbar.make(mCoordinatorLayout, getString(R.string.text_finger_not_found), Snackbar.LENGTH_LONG).show();
+        Snackbar.make(mCoordinatorLayout, getString(R.string.text_finger_found), Snackbar.LENGTH_LONG).show();
         navigateToNext();
     }
 
@@ -45,6 +46,22 @@ public class FingerPrint extends AppCompatActivity implements FingerprintViewInt
 
     @Override
     public void navigateToNext() {
+
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        mFingerprintPresenter.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        mFingerprintPresenter.onResume();
 
     }
 }

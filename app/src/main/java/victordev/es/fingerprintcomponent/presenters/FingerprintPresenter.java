@@ -1,5 +1,6 @@
 package victordev.es.fingerprintcomponent.presenters;
 
+import android.Manifest;
 import android.content.Context;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
@@ -16,6 +17,7 @@ import victordev.es.fingerprintcomponent.interfaces.OnFingerprintEvents;
  */
 
 public class FingerprintPresenter implements FingerprintPresenterInterface, OnFingerprintEvents {
+    private static final int FINGERPRINT_PERMISSION_REQUEST_CODE = 1234;
     private FingerPrint mFingerpringView;
     private FingerprintInteractor mFingerprintInteractor;
 
@@ -23,6 +25,9 @@ public class FingerprintPresenter implements FingerprintPresenterInterface, OnFi
     public FingerprintPresenter(FingerprintViewInterface fingerprintViewInterface) {
         mFingerpringView = (FingerPrint) fingerprintViewInterface;
         mFingerprintInteractor = new FingerprintInteractor(this, mFingerpringView);
+
+        mFingerpringView.requestPermissions(new String[]{Manifest.permission.USE_FINGERPRINT}, FINGERPRINT_PERMISSION_REQUEST_CODE);
+
 
         mFingerprintInteractor.checkSecuritySettings();
     }
@@ -57,5 +62,15 @@ public class FingerprintPresenter implements FingerprintPresenterInterface, OnFi
     @Override
     public void onAuthenticationHelp(CharSequence helpString) {
         mFingerpringView.showFingerprintMessage(helpString.toString());
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    public void onPause() {
+        mFingerprintInteractor.onPause();
+    }
+
+    public void onResume() {
+        mFingerprintInteractor.onResume();
+
     }
 }
