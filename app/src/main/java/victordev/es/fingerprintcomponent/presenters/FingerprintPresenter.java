@@ -29,7 +29,7 @@ public class FingerprintPresenter implements FingerprintPresenterInterface, OnFi
         mFingerpringView.requestPermissions(new String[]{Manifest.permission.USE_FINGERPRINT}, FINGERPRINT_PERMISSION_REQUEST_CODE);
 
 
-        mFingerprintInteractor.checkSecuritySettings();
+        mFingerprintInteractor.startAuthentication();
     }
 
 

@@ -5,12 +5,6 @@ package victordev.es.fingerprintcomponent.interfaces;
  */
 
 public interface FingerprintViewInterface {
-
-    /*void lockScreenSecurityNotEnable();
-    void fingerprintAuthenticationNotEnabled();
-    void hasNotFingersEnrolled();*/
-
-
     void showFingerprintMessage(CharSequence text);
     void authenticationSucceded();
     void authenticationFailed();

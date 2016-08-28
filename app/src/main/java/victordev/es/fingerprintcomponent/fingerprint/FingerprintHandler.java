@@ -9,7 +9,7 @@ import android.os.CancellationSignal;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 
-import victordev.es.fingerprintcomponent.interactors.FingerprintInteractor;
+import victordev.es.fingerprintcomponent.helpers.FingerprintHelper;
 
 /**
  * Created by victor on 27/8/16.
@@ -17,7 +17,7 @@ import victordev.es.fingerprintcomponent.interactors.FingerprintInteractor;
 
 @RequiresApi(api = Build.VERSION_CODES.M)
 public class FingerprintHandler extends FingerprintManager.AuthenticationCallback {
-    private FingerprintInteractor mFingerprintInteractor;
+    private FingerprintHelper mFingerprintHelper;
 
     private CancellationSignal mCancellationSignal;
     private FingerprintManager mFingerprintManager;
@@ -26,14 +26,15 @@ public class FingerprintHandler extends FingerprintManager.AuthenticationCallbac
     private Context mAppContext;
 
 
-    public FingerprintHandler(Context context, FingerprintInteractor interactor) {
+    public FingerprintHandler(Context context, FingerprintHelper helper) {
         mAppContext = context;
-        mFingerprintInteractor = interactor;
+        mFingerprintHelper = helper;
 
     }
 
     /*
-        Este método es el primero que se cuando se inicia el proceso de autentificación. Se le debe pasar las intancias del FingerprintManager
+        Este método es el primero que se cuando se inicia el proceso de autentificación.
+        Se le debe pasar las intancias del FingerprintManager
         y del CryptoObject
      */
     public void startAuth(FingerprintManager manager,
@@ -70,7 +71,7 @@ public class FingerprintHandler extends FingerprintManager.AuthenticationCallbac
     public void onAuthenticationHelp(int helpCode, CharSequence helpString) {
         super.onAuthenticationHelp(helpCode, helpString);
 
-        mFingerprintInteractor.onAuthenticationHelp(helpString);
+        mFingerprintHelper.onAuthenticationHelp(helpString);
         startAuth(mFingerprintManager, mCryptoObject);
     }
 
@@ -78,7 +79,7 @@ public class FingerprintHandler extends FingerprintManager.AuthenticationCallbac
     public void onAuthenticationSucceeded(FingerprintManager.AuthenticationResult result) {
         super.onAuthenticationSucceeded(result);
 
-        mFingerprintInteractor.onAuthenticationSucceeded();
+        mFingerprintHelper.onAuthenticationSucceeded();
         startAuth(mFingerprintManager, mCryptoObject);
     }
 
@@ -86,7 +87,7 @@ public class FingerprintHandler extends FingerprintManager.AuthenticationCallbac
     public void onAuthenticationFailed() {
         super.onAuthenticationFailed();
 
-        mFingerprintInteractor.onAuthenticationFailed();
+        mFingerprintHelper.onAuthenticationFailed();
 
         startAuth(mFingerprintManager, mCryptoObject);
     }
