@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="FingerprintComponent">
+        <attr name="fingerprint_not_found" format="string"/>
+        <attr name="finger_print_found" format="string"/>
+        <attr name="vibrate_time" format="integer" />
+        <attr name="error_background_color" format="string"/>
+        <attr name="background_color" format="string"/>
+        <attr name="text" format="string"/>
+        <attr name="font_size" format="integer"/>
+    </declare-styleable>
+</resources>

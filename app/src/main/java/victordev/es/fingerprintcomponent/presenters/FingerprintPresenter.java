@@ -15,9 +15,8 @@ import victordev.es.fingerprintcomponent.interfaces.OnFingerprintEvents;
 /**
  * Created by victor on 27/8/16.
  */
-
+@RequiresApi(api = Build.VERSION_CODES.M)
 public class FingerprintPresenter implements FingerprintPresenterInterface, OnFingerprintEvents {
-    private static final int FINGERPRINT_PERMISSION_REQUEST_CODE = 1234;
     private FingerPrint mFingerpringView;
     private FingerprintInteractor mFingerprintInteractor;
 
@@ -25,8 +24,6 @@ public class FingerprintPresenter implements FingerprintPresenterInterface, OnFi
     public FingerprintPresenter(FingerprintViewInterface fingerprintViewInterface) {
         mFingerpringView = (FingerPrint) fingerprintViewInterface;
         mFingerprintInteractor = new FingerprintInteractor(this, mFingerpringView);
-
-        mFingerpringView.requestPermissions(new String[]{Manifest.permission.USE_FINGERPRINT}, FINGERPRINT_PERMISSION_REQUEST_CODE);
 
 
         mFingerprintInteractor.startAuthentication();
@@ -36,7 +33,6 @@ public class FingerprintPresenter implements FingerprintPresenterInterface, OnFi
     @Override
     public void lockScreenSecurityNotEnable() {
         mFingerpringView.showFingerprintMessage(mFingerpringView.getString(R.string.text_finger_lock_screen_not_enabled));
-
     }
 
     @Override
@@ -64,13 +60,13 @@ public class FingerprintPresenter implements FingerprintPresenterInterface, OnFi
         mFingerpringView.showFingerprintMessage(helpString.toString());
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
+    @Override
     public void onPause() {
         mFingerprintInteractor.onPause();
     }
 
+    @Override
     public void onResume() {
         mFingerprintInteractor.onResume();
-
     }
 }

@@ -1,6 +1,7 @@
 package victordev.es.fingerprintcomponent.helpers;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.KeyguardManager;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -41,7 +42,7 @@ import victordev.es.fingerprintcomponent.presenters.FingerprintPresenter;
 
 @RequiresApi(api = Build.VERSION_CODES.M)
 public class FingerprintHelper implements FingerprintHelperInterface{
-
+    private static final int FINGERPRINT_PERMISSION_REQUEST_CODE = 1234;
     private static final String KEY_NAME = "key_for_example)";
 
 
@@ -67,6 +68,8 @@ public class FingerprintHelper implements FingerprintHelperInterface{
     }
 
     public void checkSecuritySettings() {
+        ((Activity) mContext).requestPermissions(new String[]{Manifest.permission.USE_FINGERPRINT}, FINGERPRINT_PERMISSION_REQUEST_CODE);
+
         mKeyguardManager = (KeyguardManager) mContext.getSystemService(KeyguardManager.class);
         mFingerprintManager = (FingerprintManager) mContext.getSystemService(FingerprintManager.class);
 
