@@ -3,5 +3,4 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fingerprint_text_margin_top">30dp</dimen>
-    <dimen name="fingerprint_default_text_size">16sp</dimen>
 </resources>

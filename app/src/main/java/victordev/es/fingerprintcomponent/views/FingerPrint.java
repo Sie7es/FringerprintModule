@@ -9,20 +9,19 @@ import android.support.annotation.RequiresApi;
 import android.support.design.widget.Snackbar;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.ViewTreeObserver;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import victordev.es.fingerprintcomponent.R;
 import victordev.es.fingerprintcomponent.interfaces.FingerprintViewInterface;
 import victordev.es.fingerprintcomponent.presenters.FingerprintPresenter;
 
+@RequiresApi(api = Build.VERSION_CODES.M)
 public class FingerPrint extends RelativeLayout implements FingerprintViewInterface {
     private static final String REX_HEX_COLOR = "^#[0-9a-fA-F]{6}$|^#[0-9a-fA-F]{8}$";
     private static final int DEFAULT_VIBRATE_TIME = 800;
+    private static final int DEFAULT_TEXT_SIZE = 16;
 
     private RelativeLayout mMainLayout;
     private TextView mFingerPrintText;
@@ -77,7 +76,7 @@ public class FingerPrint extends RelativeLayout implements FingerprintViewInterf
         setup(context);
         init(attrs);
     }
-    @RequiresApi(api = Build.VERSION_CODES.M)
+
     public FingerPrint(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
 
@@ -98,22 +97,26 @@ public class FingerPrint extends RelativeLayout implements FingerprintViewInterf
 
         LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
 
-        ViewTreeObserver vto = mMainLayout.getViewTreeObserver();
+        /*ViewTreeObserver vto = mMainLayout.getViewTreeObserver();
         vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
                 mMainLayout.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                mFingerprintPresenter = new FingerprintPresenter(FingerPrint.this);
             }
-        });
+        });*/
         addView(view, params);
-
+        mFingerprintPresenter = new FingerprintPresenter(FingerPrint.this);
     }
 
 
     private void init(AttributeSet attrs) {
         if (attrs != null) {
             TypedArray array = mContext.obtainStyledAttributes(attrs, R.styleable.FingerprintComponent, 0, 0);
+
+            //TEXT SIZE
+            int fontSize = array.getInteger(R.styleable.FingerprintComponent_font_size,
+                    DEFAULT_TEXT_SIZE);
+            setFingerprintTextSize(fontSize);
 
             //TEXT FINGERPRINT
             setFingerprintText(array.getString(R.styleable.FingerprintComponent_initial_message));
@@ -124,9 +127,6 @@ public class FingerPrint extends RelativeLayout implements FingerprintViewInterf
             //ERROR BACKGROUND COLOR
             setFingerPrintErrorBackgroundColor(array.getString(R.styleable.FingerprintComponent_error_background_color));
 
-            //TEXT SIZE
-            setFingerprintTextSize(array.getInt(R.styleable.FingerprintComponent_font_size,
-                    (int) mContext.getResources().getDimension(R.dimen.fingerprint_default_text_size)));
 
             //TEXT FOR FINGERPRINT FOUND
             if (array.getString(R.styleable.FingerprintComponent_finger_print_found) != null && array.getString(R.styleable.FingerprintComponent_finger_print_found).length() > 0) {
