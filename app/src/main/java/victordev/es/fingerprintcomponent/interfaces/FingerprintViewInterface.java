@@ -8,5 +8,4 @@ public interface FingerprintViewInterface {
     void showFingerprintMessage(CharSequence text);
     void authenticationSucceded();
     void authenticationFailed();
-    void navigateToNext();
 }

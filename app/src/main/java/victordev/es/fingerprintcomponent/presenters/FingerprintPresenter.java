@@ -1,11 +1,9 @@
 package victordev.es.fingerprintcomponent.presenters;
 
-import android.Manifest;
-import android.content.Context;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 
-import victordev.es.fingerprintcomponent.FingerPrint;
+import victordev.es.fingerprintcomponent.views.FingerPrint;
 import victordev.es.fingerprintcomponent.R;
 import victordev.es.fingerprintcomponent.interactors.FingerprintInteractor;
 import victordev.es.fingerprintcomponent.interfaces.FingerprintPresenterInterface;
@@ -20,10 +18,9 @@ public class FingerprintPresenter implements FingerprintPresenterInterface, OnFi
     private FingerPrint mFingerpringView;
     private FingerprintInteractor mFingerprintInteractor;
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
     public FingerprintPresenter(FingerprintViewInterface fingerprintViewInterface) {
         mFingerpringView = (FingerPrint) fingerprintViewInterface;
-        mFingerprintInteractor = new FingerprintInteractor(this, mFingerpringView);
+        mFingerprintInteractor = new FingerprintInteractor(this, mFingerpringView.getContext());
 
 
         mFingerprintInteractor.startAuthentication();
@@ -32,17 +29,17 @@ public class FingerprintPresenter implements FingerprintPresenterInterface, OnFi
 
     @Override
     public void lockScreenSecurityNotEnable() {
-        mFingerpringView.showFingerprintMessage(mFingerpringView.getString(R.string.text_finger_lock_screen_not_enabled));
+        mFingerpringView.showFingerprintMessage(mFingerpringView.getContext().getString(R.string.text_finger_lock_screen_not_enabled));
     }
 
     @Override
     public void fingerprintAuthenticationNotEnabled() {
-        mFingerpringView.showFingerprintMessage(mFingerpringView.getString(R.string.text_fingerprint_permission_not_enabled));
+        mFingerpringView.showFingerprintMessage(mFingerpringView.getContext().getString(R.string.text_fingerprint_permission_not_enabled));
     }
 
     @Override
     public void hasNotFingersEnrolled() {
-        mFingerpringView.showFingerprintMessage(mFingerpringView.getString(R.string.text_fingerprint_has_not_fingers_enrolled));
+        mFingerpringView.showFingerprintMessage(mFingerpringView.getContext().getString(R.string.text_fingerprint_has_not_fingers_enrolled));
     }
 
     @Override

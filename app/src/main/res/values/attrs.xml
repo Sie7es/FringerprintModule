@@ -6,7 +6,7 @@
         <attr name="vibrate_time" format="integer" />
         <attr name="error_background_color" format="string"/>
         <attr name="background_color" format="string"/>
-        <attr name="text" format="string"/>
+        <attr name="initial_message" format="string"/>
         <attr name="font_size" format="integer"/>
     </declare-styleable>
 </resources>
