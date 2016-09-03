@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:FingerprintComponent="http://schemas.android.com/apk/res-auto"
+    xmlns:FingerprintModule="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorAccent">
+    android:background="#DFE">
 
-    <victordev.es.fingerprintcomponent.views.FingerPrint
+    <victordev.es.fingerprintmodule.views.FingerPrint
+        android:id="@+id/finger_print_view"
         android:layout_width="match_parent"
-        FingerprintComponent:font_size="20"
-        FingerprintComponent:vibrate_time="800"
+        FingerprintModule:font_size="20"
+        FingerprintModule:vibrate_time="800"
+        FingerprintModule:initial_message="A ver si cambia el texto"
+        FingerprintModule:background_color="#DCACAC"
+        FingerprintModule:finger_print_found="ENCONTRADAAAAA"
         android:layout_height="300dp">
 
-    </victordev.es.fingerprintcomponent.views.FingerPrint>
+    </victordev.es.fingerprintmodule.views.FingerPrint>
 
 </LinearLayout>

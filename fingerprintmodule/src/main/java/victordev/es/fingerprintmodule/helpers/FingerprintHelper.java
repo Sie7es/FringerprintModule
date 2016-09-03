@@ -1,4 +1,4 @@
-package victordev.es.fingerprintcomponent.helpers;
+package victordev.es.fingerprintmodule.helpers;
 
 import android.Manifest;
 import android.app.Activity;
@@ -30,11 +30,11 @@ import javax.crypto.KeyGenerator;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 
-import victordev.es.fingerprintcomponent.R;
-import victordev.es.fingerprintcomponent.fingerprint.FingerprintHandler;
-import victordev.es.fingerprintcomponent.interfaces.FingerprintHelperInterface;
-import victordev.es.fingerprintcomponent.interfaces.FingerprintPresenterInterface;
-import victordev.es.fingerprintcomponent.presenters.FingerprintPresenter;
+import victordev.es.fingerprintmodule.R;
+import victordev.es.fingerprintmodule.fingerprint.FingerprintHandler;
+import victordev.es.fingerprintmodule.interfaces.FingerprintHelperInterface;
+import victordev.es.fingerprintmodule.interfaces.FingerprintPresenterInterface;
+import victordev.es.fingerprintmodule.presenters.FingerprintPresenter;
 
 /**
  * Created by victor on 28/8/16.

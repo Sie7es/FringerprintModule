@@ -1,4 +1,4 @@
-package victordev.es.fingerprintcomponent.fingerprint;
+package victordev.es.fingerprintmodule.fingerprint;
 
 import android.Manifest;
 import android.content.Context;
@@ -9,7 +9,7 @@ import android.os.CancellationSignal;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 
-import victordev.es.fingerprintcomponent.helpers.FingerprintHelper;
+import victordev.es.fingerprintmodule.helpers.FingerprintHelper;
 
 /**
  * Created by victor on 27/8/16.

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="FingerprintComponent">
+    <declare-styleable name="FingerprintModule">
         <attr name="fingerprint_not_found" format="string"/>
         <attr name="finger_print_found" format="string"/>
         <attr name="vibrate_time" format="integer" />

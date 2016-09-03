@@ -1,4 +1,4 @@
-package victordev.es.fingerprintcomponent.views;
+package victordev.es.fingerprintmodule.views;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -13,9 +13,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import victordev.es.fingerprintcomponent.R;
-import victordev.es.fingerprintcomponent.interfaces.FingerprintViewInterface;
-import victordev.es.fingerprintcomponent.presenters.FingerprintPresenter;
+
+import victordev.es.fingerprintmodule.R;
+import victordev.es.fingerprintmodule.interfaces.FingerprintViewInterface;
+import victordev.es.fingerprintmodule.presenters.FingerprintPresenter;
 
 @RequiresApi(api = Build.VERSION_CODES.M)
 public class FingerPrint extends RelativeLayout implements FingerprintViewInterface {
@@ -27,7 +28,7 @@ public class FingerPrint extends RelativeLayout implements FingerprintViewInterf
     private TextView mFingerPrintText;
     private FingerprintPresenter mFingerprintPresenter;
     private Context mContext;
-    private OnFingerprintComponentCallback mFingerprintCallback;
+    private OnFingerprintModuleCallback mFingerprintCallback;
 
     private String mFingerprintFoundText;
     private String mFingerprintNotFoundText;
@@ -46,12 +47,12 @@ public class FingerPrint extends RelativeLayout implements FingerprintViewInterf
         }
     }
 
-    public interface OnFingerprintComponentCallback {
+    public interface OnFingerprintModuleCallback {
         void fingerFound();
         void fingerNotFound();
     }
 
-    public void setFingerprintComponentCallback(OnFingerprintComponentCallback callback) {
+    public void setFingerprintModuleCallback(OnFingerprintModuleCallback callback) {
         this.mFingerprintCallback = callback;
     }
 
@@ -111,40 +112,40 @@ public class FingerPrint extends RelativeLayout implements FingerprintViewInterf
 
     private void init(AttributeSet attrs) {
         if (attrs != null) {
-            TypedArray array = mContext.obtainStyledAttributes(attrs, R.styleable.FingerprintComponent, 0, 0);
+            TypedArray array = mContext.obtainStyledAttributes(attrs, R.styleable.FingerprintModule, 0, 0);
 
             //TEXT SIZE
-            int fontSize = array.getInteger(R.styleable.FingerprintComponent_font_size,
+            int fontSize = array.getInteger(R.styleable.FingerprintModule_font_size,
                     DEFAULT_TEXT_SIZE);
             setFingerprintTextSize(fontSize);
 
             //TEXT FINGERPRINT
-            setFingerprintText(array.getString(R.styleable.FingerprintComponent_initial_message));
+            setFingerprintText(array.getString(R.styleable.FingerprintModule_initial_message));
 
             //BACKGROUND COLOR
-            setFingerprintBackgroundColor(array.getString(R.styleable.FingerprintComponent_background_color));
+            setFingerprintBackgroundColor(array.getString(R.styleable.FingerprintModule_background_color));
 
             //ERROR BACKGROUND COLOR
-            setFingerPrintErrorBackgroundColor(array.getString(R.styleable.FingerprintComponent_error_background_color));
+            setFingerPrintErrorBackgroundColor(array.getString(R.styleable.FingerprintModule_error_background_color));
 
 
             //TEXT FOR FINGERPRINT FOUND
-            if (array.getString(R.styleable.FingerprintComponent_finger_print_found) != null && array.getString(R.styleable.FingerprintComponent_finger_print_found).length() > 0) {
-                mFingerprintFoundText = array.getString(R.styleable.FingerprintComponent_finger_print_found);
+            if (array.getString(R.styleable.FingerprintModule_finger_print_found) != null && array.getString(R.styleable.FingerprintModule_finger_print_found).length() > 0) {
+                mFingerprintFoundText = array.getString(R.styleable.FingerprintModule_finger_print_found);
             } else {
                 mFingerprintFoundText = mContext.getString(R.string.text_finger_found);
             }
 
 
             //TEXT FOR FINGERPRINT NOT FOUND
-            if (array.getString(R.styleable.FingerprintComponent_fingerprint_not_found) != null && array.getString(R.styleable.FingerprintComponent_fingerprint_not_found).length() > 0) {
-                mFingerprintNotFoundText = array.getString(R.styleable.FingerprintComponent_fingerprint_not_found);
+            if (array.getString(R.styleable.FingerprintModule_fingerprint_not_found) != null && array.getString(R.styleable.FingerprintModule_fingerprint_not_found).length() > 0) {
+                mFingerprintNotFoundText = array.getString(R.styleable.FingerprintModule_fingerprint_not_found);
             } else {
                 mFingerprintNotFoundText = mContext.getString(R.string.text_finger_not_found);
             }
 
             //VIBRATE TIME
-            mVibrateTime = array.getInteger(R.styleable.FingerprintComponent_vibrate_time, DEFAULT_VIBRATE_TIME);
+            mVibrateTime = array.getInteger(R.styleable.FingerprintModule_vibrate_time, DEFAULT_VIBRATE_TIME);
         }
     }
 
@@ -192,15 +193,5 @@ public class FingerPrint extends RelativeLayout implements FingerprintViewInterf
         Matcher m = r.matcher(hexColor);
 
         return m.find();
-    }
-
-
-    protected void onPause() {
-        mFingerprintPresenter.onPause();
-    }
-
-    protected void onResume() {
-        mFingerprintPresenter.onResume();
-
     }
 }

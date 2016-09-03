@@ -1,14 +1,14 @@
-package victordev.es.fingerprintcomponent.presenters;
+package victordev.es.fingerprintmodule.presenters;
 
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 
-import victordev.es.fingerprintcomponent.views.FingerPrint;
-import victordev.es.fingerprintcomponent.R;
-import victordev.es.fingerprintcomponent.interactors.FingerprintInteractor;
-import victordev.es.fingerprintcomponent.interfaces.FingerprintPresenterInterface;
-import victordev.es.fingerprintcomponent.interfaces.FingerprintViewInterface;
-import victordev.es.fingerprintcomponent.interfaces.OnFingerprintEvents;
+import victordev.es.fingerprintmodule.views.FingerPrint;
+import victordev.es.fingerprintmodule.R;
+import victordev.es.fingerprintmodule.interactors.FingerprintInteractor;
+import victordev.es.fingerprintmodule.interfaces.FingerprintPresenterInterface;
+import victordev.es.fingerprintmodule.interfaces.FingerprintViewInterface;
+import victordev.es.fingerprintmodule.interfaces.OnFingerprintEvents;
 
 /**
  * Created by victor on 27/8/16.

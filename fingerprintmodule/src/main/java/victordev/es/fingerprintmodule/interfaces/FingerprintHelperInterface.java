@@ -1,6 +1,4 @@
-package victordev.es.fingerprintcomponent.interfaces;
-
-import victordev.es.fingerprintcomponent.fingerprint.FingerprintHandler;
+package victordev.es.fingerprintmodule.interfaces;
 
 /**
  * Created by victor on 28/8/16.
